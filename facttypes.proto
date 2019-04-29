@@ -1,0 +1,16 @@
+import "base.proto";
+import "facttypes_base.proto";
+
+message Equality: NFactType.TFact
+{
+	optional string Name1 = 1;
+		optional string Name2 = 2;
+}
+
+message Including: NFactType.TFact
+{
+	optional string Name1 = 1;
+		optional string Name2 = 2;
+}
+
+

@@ -1,0 +1,23 @@
+encoding "utf8";
+
+TTextMinerConfig {
+  Dictionary = "dict.gzt";
+  PrettyOutput = "output.html";
+  Input = {
+    File = "imputs/The main stages of human development.txt ";
+  }
+
+  Articles = [
+    { Name = "testarticle" }
+  ]
+
+  Facts = [
+    { Name = "Equality" },
+        { Name = "Including" }
+  ]
+
+  Output = {
+    File = "output.txt";
+    Format = text;
+  }
+}
