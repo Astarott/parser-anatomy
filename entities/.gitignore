@@ -1,0 +1,4 @@
+libmystem_c_binding.so
+*.bin
+output.*
+tree.txt
