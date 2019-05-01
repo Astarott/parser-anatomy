@@ -1,0 +1,27 @@
+encoding "utf8";
+
+TTextMinerConfig {
+  Dictionary = "dict.gzt";
+  PrettyOutput = "output.html";
+
+  Input = {
+    //Dir = "inputs";
+    File = "inputs/Musculoskeletal system.txt";
+  }
+
+  Articles = [
+    { Name = "ent" }
+  ]
+
+  Facts = [
+    { Name = "Entity" },
+    { Name = "Equality" },
+    { Name = "Including"}
+  ]
+  
+  Output = {
+    File = "ent.txt";
+    Format = text;
+  }
+}
+

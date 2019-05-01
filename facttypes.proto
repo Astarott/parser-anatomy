@@ -13,4 +13,9 @@ message Including: NFactType.TFact
 		optional string Name2 = 2;
 }
 
+message Entity: NFactType.TFact
+{
+	optional string Name = 1;
+}
+
 
