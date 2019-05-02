@@ -5,9 +5,25 @@ import "articles_base.proto";
 
 import "facttypes.proto";
 
-TAuxDicArticle "testarticle"
+TAuxDicArticle "ent"
 {
-    key = { "tomita:gram.cxx" type=CUSTOM }
+    key = { "tomita:entities.cxx" type=CUSTOM }
 }
 
-    
+TAuxDicArticle "включение"
+{
+    key = { "dictionaries/include.txt" type=FILE }
+}
+TAuxDicArticle "сущ"
+{
+    key = { "dictionaries/dict.entities.txt" type=FILE }
+}
+TAuxDicArticle "спецслова"
+{
+    key = { "dictionaries/dict.excluded.txt" type=FILE }
+}
+TAuxDicArticle "прил"
+{
+    key = { "dictionaries/dict.adj.txt" type=FILE }
+}
+

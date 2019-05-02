@@ -19,3 +19,15 @@ message Entity: NFactType.TFact
 }
 
 
+message Translate: NFactType.TFact
+{
+	optional string ru = 1;
+	optional string grec = 2 [(NFactType.normcase) = TITLE_CASE];
+}
+
+message Sin: NFactType.TFact
+{
+	optional string ent1 = 1;
+	optional string ent2 = 2;
+}
+

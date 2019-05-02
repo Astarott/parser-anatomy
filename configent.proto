@@ -15,10 +15,13 @@ TTextMinerConfig {
 
   Facts = [
     { Name = "Entity" },
-    { Name = "Equality" },
-    { Name = "Including"}
+    //{ Name = "Equality" },
+    { Name = "Including"},
+    { Name = "Translate"},
+    { Name = "Sin"}
+    
   ]
-  
+
   Output = {
     File = "ent.txt";
     Format = text;
