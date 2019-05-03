@@ -2,3 +2,4 @@
 tomitaparser.exe
 *.bin
 config.1.proto
+libmystem_c_binding.so

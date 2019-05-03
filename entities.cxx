@@ -9,10 +9,16 @@
 Ent -> Word<kwtype="прил",gnc-agr[1]>* Word<kwtype="сущ", rt, gnc-agr[1]>;
 Ent -> Word<kwtype="сущ", gn-agr[1], rt> Word<kwtype="сущ",gn-agr[1],gram="род">+;
 
+//Ent -> 'все' 'вид' Word<kwtype="сущ",gram="вин"> ;
 
-//Слова включения (Работает, добавить слова в статью и немного дораборать)
+// "костная часть ребра"
+Ent -> 'часть' Word<kwtype="сущ",gram="род"> ;
+Ent -> Word<kwtype="прил">* 'часть' Word<kwtype="сущ",gram="род"> ;
+
+//Слова-включения (Работает, добавить слова в статью и немного доработать)
 mus -> (Ent<gram="вин">) (',') ('и') (Ent<gram="вин">) (',') ('и') (Ent<gram="вин">) (',') ('и') (Ent<gram="вин">) (',') ('и') Ent<gram="вин">;
 Including ->  Ent interp(Including.Name1) Word<kwtype="включение"> mus interp(Including.Name2);
+Including ->  Ent interp(Including.Name1) 'состоять' 'из' mus interp(Including.Name2);
 //Including ->  Ent interp(Including.Name1) Word<kwtype="включение"> mus interp(Including.Name2);
 
 //Работа с тире (доделать)

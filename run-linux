@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+tomita-parser configent.proto > /dev/null
+echo Including $(grep -i including ent.txt | wc -l)
