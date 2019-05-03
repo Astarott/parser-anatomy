@@ -18,8 +18,10 @@ TTextMinerConfig {
     //{ Name = "Equality" },
     { Name = "Including"},
     { Name = "Translate"},
-    { Name = "Sin"}
-    
+    { Name = "Sin"},
+    { Name = "Connection"},
+    { Name = "Participle"},
+    { Name = "Example"}
   ]
 
   Output = {

@@ -14,11 +14,12 @@ TAuxDicArticle "включение"
 {
     key = { "dictionaries/include.txt" type=FILE }
 }
+
 TAuxDicArticle "сущ"
 {
     key = { "dictionaries/dict.entities.txt" type=FILE }
 }
-TAuxDicArticle "спецслова"
+TAuxDicArticle "допслова"
 {
     key = { "dictionaries/dict.excluded.txt" type=FILE }
 }
