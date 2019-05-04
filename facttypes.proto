@@ -5,6 +5,7 @@ message Equality: NFactType.TFact
 {
 	optional string Name1 = 1;
 	optional string Name2 = 2;
+	optional string option = 3;
 }
 
 message Including: NFactType.TFact
@@ -46,6 +47,6 @@ message Example: NFactType.TFact
 message Connection: NFactType.TFact
 {
 	optional string first= 1;
-	optional string second = 2;
-	optional string with = 3;
+	optional string second = 3;
+	optional string with = 2;
 }

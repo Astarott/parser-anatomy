@@ -15,7 +15,7 @@ TTextMinerConfig {
 
   Facts = [
     { Name = "Entity" },
-    //{ Name = "Equality" },
+    { Name = "Equality" },
     { Name = "Including"},
     { Name = "Translate"},
     { Name = "Sin"},

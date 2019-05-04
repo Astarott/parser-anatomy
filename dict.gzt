@@ -15,6 +15,11 @@ TAuxDicArticle "включение"
     key = { "dictionaries/include.txt" type=FILE }
 }
 
+TAuxDicArticle "равенство"
+{
+    key = { "dictionaries/equality.txt" type=FILE }
+}
+
 TAuxDicArticle "сущ"
 {
     key = { "dictionaries/dict.entities.txt" type=FILE }
@@ -26,5 +31,13 @@ TAuxDicArticle "допслова"
 TAuxDicArticle "прил"
 {
     key = { "dictionaries/dict.adj.txt" type=FILE }
+}
+TAuxDicArticle "вместимость"
+{
+    key = { "в" | "внутри" }
+}
+TAuxDicArticle "между"
+{
+    key = { "в виде" | "с помощью" | "как" | "для" }
 }
 

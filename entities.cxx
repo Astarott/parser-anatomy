@@ -5,20 +5,28 @@
 //SuperEntity -> Entity Word<kwtype="включение"> Entity;
 //Fraza ->  Word<kwtype="прил",gnc-agr[1]>* Word<kwtype="сущ", rt, gnc-agr[1]>
 
+//Прилагательные
+ExtendAdj -> Word<kwset=["прил","допслова"],gnc-agr[1], GU=["A",~"partcp"]> ("и") (Word<kwset=["прил","допслова"],gnc-agr[1], GU=["A",~"partcp"]>*);
+//Числительные
+chislit -> Word<gram="NUM">;
+chislit -> Word<wfm="[0-9]{1,10}">;
+chislit -> Word<wfm="[I|L|V|X]{1,10}">;
+
 //Объявление сущностей
-Ent -> (Word<gram="NUM">*) (Word<wfm="[0-9]{1,10}">*) Word<kwtype="прил",gnc-agr[1]>* Word<kwtype="сущ", rt, gnc-agr[1], gram=~"род">;
-Ent -> (Word<gram="NUM">*) (Word<wfm="[0-9]{1,10}">*) Word<kwtype="допслова",gnc-agr[1], gram="A">* Word<kwtype="сущ", rt, gnc-agr[1], gram=~"род">;
+Ent -> (chislit*) (ExtendAdj<gnc-agr[1]>) Word<kwtype="сущ", rt, gnc-agr[1], gram=~"род">;
 
-Ent -> (Word<gram="NUM">*) (Word<wfm="[0-9]{1,10}">*) Word<kwtype="сущ", gn-agr[1], rt> Word<kwtype="сущ",gn-agr[1],gram="род">;
-Ent -> (Word<gram="NUM">*) (Word<wfm="[0-9]{1,10}">*) Word<kwtype="сущ", rt> Word<kwtype="прил",gnc-agr[2]>* Word<kwtype="сущ", gnc-agr[2], gram="род">;
+//Конструкции с родительным падежом (типа "кость правого ребра").
+Ent -> (chislit*) (ExtendAdj<gnc-agr[1]>) Word<kwset=["сущ","допслова"], gnc-agr[1], GU=["S"], rt> (ExtendAdj<gnc-agr[2], gram="род">) Word<kwset=["сущ","допслова"], gnc-agr[2], GU=["S","род"]> ('и') (ExtendAdj<gnc-agr[2], gram="род">) (Word<kwset=["сущ","допслова"], gnc-agr[2], GU=["S","род"]>);
 
-Ent -> (Word<gram="NUM">*) (Word<wfm="[0-9]{1,10}">*) Word<kwtype="прил",gnc-agr[1]>* Word<kwtype="допслова", rt, gnc-agr[1],gram="S">;
-Ent -> (Word<gram="NUM">*) (Word<wfm="[0-9]{1,10}">*) Word<kwtype="допслова",gram="S,им", rt> Word<kwtype="прил",gnc-agr[2]>* Word<kwtype="сущ", gnc-agr[2], gram="род"> ('и') (Word<kwset=["сущ","допслова"], gnc-agr[2], gram="род">);
-Ent -> (Word<gram="NUM">*) (Word<wfm="[0-9]{1,10}">*) Word<kwtype="сущ", rt> Word<kwtype="допслова", gnc-agr[2], gram="A">* Word<kwtype="сущ", gnc-agr[2], gram="род">;
+//Дополнительные существительные
+Ent -> (chislit*) (ExtendAdj<gnc-agr[1]>) Word<kwtype="допслова", rt, gnc-agr[1], GU=["S",~"род"]>;
 
 //Включение допольнителньых прилагательных (замедляет скорость работы, но конкретизирует сущности)
-Ent -> (Word<gram="NUM">*) (Word<wfm="[0-9]{1,10}">*) Adj<gnc-agr[1]>* Word<kwtype="сущ", gnc-agr[1], rt>;
-Ent -> (Word<gram="NUM">*) (Word<wfm="[0-9]{1,10}">*) Adj<gnc-agr[1]>* Word<kwtype="допслова",gram="S,им", rt, gnc-agr[1]> Word<kwtype="прил",gnc-agr[2]>* (Word<kwtype="сущ", gnc-agr[2], gram="род">) ('и') (Word<kwset=["сущ","допслова"], gnc-agr[2], gram="род">);
+Ent -> (chislit*) Adj<gnc-agr[1], GU=["A",~"partcp"]>* ('и') (Adj<gnc-agr[1], GU=["A"]>*) Word<kwtype="сущ", gnc-agr[1], rt>;
+//Ent -> (Word<gram="NUM">*) (Word<wfm="[0-9]{1,10}">*) Adj<gnc-agr[1]>* Word<kwtype="допслова",gram="S,им", rt, gnc-agr[1]> Word<kwtype="прил",gnc-agr[2]>* (Word<kwtype="сущ", gnc-agr[2], gram="род">) ('и') (Word<kwset=["сущ","допслова"], gnc-agr[2], gram="род">);
+
+//В частных случаях сущности представляют собой одни прилагательные.
+//Ent -> (chislit*) ExtendAdj;
 
 //Исключение лишних слов
 NormEnt -> Ent<wfm=~"[а-я|А-Я]{1}",gram=~"PR">;
@@ -43,6 +51,14 @@ PartExtend -> Part2;
 Oborot -> NormEnt interp(Participle.ent ::not_norm) Comma PartExtend interp (Participle.dop ::not_norm);
 Oborot -> Part interp (Participle.dop ::not_norm) NormEnt interp(Participle.ent ::not_norm);
 
+//Однородные члены.
+//odnor -> NormEnt<gram="им"> (',') ('и') (NormEnt<gram="им">) (',') ('и') ('а также') (NormEnt<gram="им">) (',') ('и') ('а также') (NormEnt<gram="им">);
+//list ->  NormEnt<gram="вин"> (',') ('и') (NormEnt<gram="вин">) (',') ('и') ('а также') (NormEnt<gram="вин">) (',') ('и') ('а также') (NormEnt<gram="вин">);
+
+ou -> (',') ('и') ('а') (':') ('также') (Word<gram="SPRO">) NormEnt;
+list -> NormEnt (ou) (ou) (ou) (ou) (ou);
+
+//doplist -> list (NormEnt);
 
 //Слова включения (Работает, добавить слова в статью и немного дораборать)
 
@@ -54,12 +70,28 @@ Oborot -> Part interp (Participle.dop ::not_norm) NormEnt interp(Participle.ent 
 //mus ->  NormEnt<gram="вин"> interp (Including.item2) (',') ('и') NormEnt<gram="вин"> interp (Including.item1);
 //mus ->  NormEnt<gram="вин"> interp (Including.item1);
 //Including -> NormEnt interp(Including.list) Word<kwtype="включение"> mus;
-list -> (NormEnt<gram="вин">) (',') ('и') (NormEnt<gram="вин">) (',') ('и') (NormEnt<gram="вин">) (',') ('и') (NormEnt<gram="вин">) (',') ('и') NormEnt<gram="вин">;
-Including ->  NormEnt interp(Including.list) (info) Word<kwtype="включение",gram="V"> list interp(Including.value);
 
-//Связь плюс
-Plus -> NormEnt "вместе" "с" NormEnt "составлять" NormEnt;
-prim -> Plus interp (Example.state);
+//Including ->  NormEnt interp(Including.list) (info) Word<kwtype="включение",gram="V"> list interp(Including.value);
+Including -> Word<kwtype="вместимость"> list interp (Including.list) Word<kwtype="включение"> list interp (Including.value);
+Including -> Word<kwtype="вместимость"> list interp (Including.list) Word<kwtype="включение"> list interp (Including.value);
+
+
+//Связь соединения.
+Connection -> ('С') NormEnt<gram="твор"> interp(Connection.first) NormEnt<gram="им"> interp(Connection.second) Word<kwtype="включение"> ('при помощи') Word<gram="род"> interp (Connection.with);
+Connection -> NormEnt interp(Connection.first) "вместе" "с" NormEnt interp (Connection.with) Word<kwtype="равенство"> NormEnt interp(Connection.second);
+
+
+//Связь равенства. Выглядит вполне неплохо, но нужно еще добавить разных случаев.
+
+//sum -> NormEnt<gram="твор"> NormEnt<gram="род"> ('и') (",") (NormEnt<gram="род">)  ('и') (",") (NormEnt<gram="род">); 
+//eq -> odnor interp (Equality.Name1 ::not_norm) (info) Word<kwtype="равенство"> doplist interp (Equality.Name2 ::not_norm); 
+//eq -> sum interp (Equality.Name1 ::not_norm) (info) Word<kwtype="равенство"> doplist interp (Equality.Name2 ::not_norm); 
+//eq -> NormEnt interp (Equality.Name1 ::not_norm) (info) Word<kwtype="равенство"> doplist interp (Equality.Name2:: not_norm);
+eq -> list interp (Equality.Name1 ::not_norm) Word<kwtype="между"> list interp (Equality.option ::not_norm) (info) Word<kwtype="равенство"> list interp (Equality.Name2:: not_norm);
+eq -> list interp (Equality.Name1 ::not_norm) (info) Word<kwtype="равенство"> list interp (Equality.Name2:: not_norm) Word<kwtype="между"> list interp (Equality.option ::not_norm);
+eq -> list interp (Equality.Name1 ::not_norm) (info) Word<kwtype="равенство",gram="V"> list interp (Equality.Name2:: not_norm);
+eq -> list interp (Equality.Name1 ::not_norm) (info) Word<kwtype="равенство",gram="V"> list interp (Equality.Name2:: not_norm);
+
 
 //Примеры
 //primer -> NormEnt<gram="твор"> NormEnt<gram="род"> Word<kwtype="включение",gram="V">;
@@ -71,19 +103,19 @@ prim -> primer interp (Example.state) list interp (Example.state);
 //Работа с тире (доделать)  
 //Including -> NormEnt interp(Including.Name1) '-' NormEnt interp(Including.Name2);
 
-//Связь соединения.
-Connection -> ('С') Word<gram="твор"> interp(Connection.first) Word<gram="им"> interp(Connection.second) Word<kwtype="включение"> ('при помощи') Word<gram="род"> interp (Connection.with);
-
-
-//Вывод
+//Вывод.
 //Final -> NormEnt interp(Entity.Name);
+//Final -> ExtendAdj interp(Entity.Name);
 
+//Final -> sum;
 //Final -> list;
-Final -> Translate;
+
 Final -> Including;
-Final -> prim;
-//Final -> Connection;
-Final -> Oborot;
-Final -> Sinonim;
+Final -> eq;
+Final -> Connection;
+
+Final -> Translate;
+//Final -> Oborot;
+//Final -> Sinonim;
 
 All -> Final;
