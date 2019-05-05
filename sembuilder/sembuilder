@@ -1,0 +1,3 @@
+#!/bin/bash -e
+
+jjs -cp jsoup-1.11.3.jar sembuilder.js
