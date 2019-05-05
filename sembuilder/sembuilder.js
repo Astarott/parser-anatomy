@@ -19,7 +19,6 @@ function runMystem(lines)
     while(line != null)
     {
 	res.push(line);
-//	print(line);
 	line = r.readLine();
     }
     p.getInputStream().close();
@@ -47,16 +46,57 @@ for(var i = 0;i < output.length;i++)
 	    continue;
 	}
 	var a = line[j].analysis;
+	if (a.length == 0)
+	{
+	    t += line[j].text;
+	    continue;
+	}
 	t += a[0].lex;
     }
+    t = t.replaceAll("\n", "");
     res.push({line: t, src: lines[i]});
 }
     return res;
 }
 
+var entities = [];
 function entity(str)
 {
-    //print(str);
+    if (str == null || str == undefined || str.trim().isEmpty())
+	return;
+    for(var i = 0;i < str.length;i++)
+	if (str[i] >= '0' && str[i] <= '9')
+	    return;
+    var items = str.toLowerCase().split(",", -1);
+    for(var i = 0;i < items.length;i++)
+    {
+	if (items[i].trim().isEmpty())
+	    continue;
+	var items2 = items[i].split(" и ", -1);
+	for(var j = 0;j < items2.length;j++)
+	    if (!items2[j].trim().isEmpty())
+		entities.push(items2[j].trim());
+    }
+}
+
+function lastWords(str, num)
+{
+    if (num == 0)
+	return "";
+    var w = str.split(" ");
+    var words = [];
+    for(var i = 0;i < w.length;i++)
+	if (!w[i].trim().isEmpty())
+	    words.push(w[i].trim());
+    if (words.length == 0)
+	return "";
+    var n = words.length > num?num:words.length;
+    var fromPos = words.length - n;
+    var b = new java.lang.StringBuilder();
+    b.append(words[fromPos]);
+    for(var i = fromPos + 1;i < words.length;i++)
+	b.append(" ").append(words[i]);
+    return b.toString();
 }
 
 function readFacts(nodes, objFunc)
@@ -151,7 +191,6 @@ var including = readFacts(doc.getElementsByTag("including"), function(tags) {
     return {nameIn: list, name: value};
 });
 
-/*
 for(var i = 0;i < equality.length;i++)
 {
     entity(equality[i].name1);
@@ -167,39 +206,56 @@ for(var i = 0;i < including.length;i++)
     entity(including[i].value);
     entity(including[i].nameIn);
 }
-*/
 
 
 
-/*
-var res = runMystem([
-    "Это пробный текст",
-    "Это всё было прошлым летом",
-"А это совсем в конце файла"]);
-
-for(var i = 0;i < res.length;i++)
+var entities2= [];
+var entitiesSet = new java.util.HashSet();
+for(var i = 0;i < entities.length;i++)
 {
-    var line = res[i];
-    print("LIne: " + i);
-    for(var j = 0;j < line.length;j++)
-    {
-	if (line[j].analysis != undefined)
-	{
-	    var a = line[j].analysis;
-	    //	    print(a.length);
-	    for(var k = 0;k < a.length;k++)
-		print("L: " + a[k].lex);
-	}
-//	print("Analysis: " + line[j].analysis);
-		print("Text: " + line[j].text);
-//		print(line[j][1]);
-    }
+    if (entitiesSet.contains(entities[i]))
+	continue;
+    entities2.push(entities[i]);
+    entitiesSet.add(entities[i]);
 }
-*/
+entities = entities2;
+entities2 = null;
+entitiesSet = null;
+entities.sort();
 
-var res = norm(["Это первая строка", "Это вторая строка, которая уже немного длиннее; то-то же!"]);
+
+res = norm(entities);
+
+var processed = new java.util.HashSet();
 for(var i = 0;i < res.length;i++)
 {
-    print(res[i].src);
-    print(res[i].line);
+    var line = res[i].line;
+    line = lastWords(line, 1);
+    if (processed.contains(line))
+	continue;
+    processed.add(line);
+    if (line.startsWith("это ") || line.startsWith("этот "))
+	continue;
+    if (line.startsWith("а "))
+	continue;
+    if (line.startsWith("он ") || line.startsWith("она "))
+	continue;
+    print(line);
+    for(var j = 0;j < res.length;j++)
+    {
+	var e = res[j].line;
+	if (e.endsWith(" " + line) && e.length() > line.length)
+	{
+	    var s = lastWords(e, 2);
+	    if (s.startsWith("каждый ") || s.startsWith("этот ") || s.startsWith("это "))
+		continue;
+	    if (s.startsWith("она ") || s.startsWith("другой") || s.startsWith("свой "))
+		continue;
+	    var id = line + " : " + s;
+	    if (processed.contains(id))
+		continue;
+	    processed.add(id);
+	    print("+" + s);
+	}
+    }
 }
