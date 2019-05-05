@@ -6,8 +6,8 @@ TTextMinerConfig {
 
   Input = {
     //Dir = "inputs";
-//    File = "inputs/Musculoskeletal system.txt";
-    File = "/tmp/input";
+    File = "inputs/Musculoskeletal system.txt";
+//    File = "/tmp/input";
   }
 
   Articles = [
@@ -27,7 +27,8 @@ TTextMinerConfig {
 
   Output = {
     File = "ent.txt";
-    Format = xml;
+        Format = text;
+//    Format = xml;
   }
 }
 
