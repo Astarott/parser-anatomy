@@ -14,16 +14,44 @@ function runMystem(lines)
     var p = b.start();
     p.getOutputStream().close();
     var r = new java.io.BufferedReader(new java.io.InputStreamReader(p.getInputStream()));
-    var b = new java.lang.StringBuilder();
+    var res = [];
     var line = r.readLine();
     while(line != null)
     {
-	b.append(line).append("\n");
+	res.push(line);
+//	print(line);
 	line = r.readLine();
     }
     p.getInputStream().close();
     tmpFile.delete();
-    return eval(b.toString());
+    for(var i = 0;i < res.length;i++)
+	res[i] = eval(res[i]);
+    return res;
+}
+
+function norm(lines)
+{
+    var output = runMystem(lines);
+    if (output.length != lines.length)
+	print("WARNING: mystem provided  another number of lines");
+    var res = [];
+for(var i = 0;i < output.length;i++)
+{
+    var line = output[i];
+    var t = "";
+    for(var j = 0;j < line.length;j++)
+    {
+	if (line[j].analysis == undefined)
+	{
+	    t += line[j].text;
+	    continue;
+	}
+	var a = line[j].analysis;
+	t += a[0].lex;
+    }
+    res.push({line: t, src: lines[i]});
+}
+    return res;
 }
 
 function entity(str)
@@ -143,5 +171,35 @@ for(var i = 0;i < including.length;i++)
 
 
 
-var res = runMystem(["Это пробный текст"]);
-print(res.length);
+/*
+var res = runMystem([
+    "Это пробный текст",
+    "Это всё было прошлым летом",
+"А это совсем в конце файла"]);
+
+for(var i = 0;i < res.length;i++)
+{
+    var line = res[i];
+    print("LIne: " + i);
+    for(var j = 0;j < line.length;j++)
+    {
+	if (line[j].analysis != undefined)
+	{
+	    var a = line[j].analysis;
+	    //	    print(a.length);
+	    for(var k = 0;k < a.length;k++)
+		print("L: " + a[k].lex);
+	}
+//	print("Analysis: " + line[j].analysis);
+		print("Text: " + line[j].text);
+//		print(line[j][1]);
+    }
+}
+*/
+
+var res = norm(["Это первая строка", "Это вторая строка, которая уже немного длиннее; то-то же!"]);
+for(var i = 0;i < res.length;i++)
+{
+    print(res[i].src);
+    print(res[i].line);
+}
