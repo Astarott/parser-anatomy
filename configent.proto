@@ -5,9 +5,9 @@ TTextMinerConfig {
   PrettyOutput = "output.html";
 
   Input = {
-    //Dir = "inputs";
-//    File = "inputs/Musculoskeletal system.txt";
-    File = "/tmp/input";
+    Dir = "inputs";
+    //File = "inputs/Musculoskeletal system.txt";
+    //File = "/tmp/input";
   }
 
   Articles = [
