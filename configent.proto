@@ -6,7 +6,8 @@ TTextMinerConfig {
 
   Input = {
     //Dir = "inputs";
-    File = "inputs/Musculoskeletal system.txt";
+//    File = "inputs/Musculoskeletal system.txt";
+    File = "/tmp/input";
   }
 
   Articles = [
