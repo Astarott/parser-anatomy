@@ -3,3 +3,5 @@ tomitaparser.exe
 *.bin
 config.1.proto
 output.html
+libmystem_c_binding.so
+	

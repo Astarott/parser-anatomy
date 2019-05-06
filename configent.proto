@@ -27,7 +27,8 @@ TTextMinerConfig {
 
   Output = {
     File = "ent.txt";
-    Format = xml;
+        Format = text;
+//    Format = xml;
   }
 }
 
