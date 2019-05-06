@@ -31,13 +31,6 @@ Ent -> (chislit*) Adj<gnc-agr[1], GU=["A",~"partcp"]>* ('и') (Adj<gnc-agr[1], G
 //Исключение лишних слов
 NormEnt -> Ent<wfm=~"[а-я|А-Я]{1}",gram=~"PR">;
 
-//Перевод с латинского  (Работает)
-lat -> LBracket AnyWord<~lat>* Word<lat,wfm=~"[I|V|L|X]{1,10}"> interp(Translate.grec);
-//lat -> LBracket AnyWord* Word<lat,wfm=~"[I|V|L|X]{1,10}"> interp(Translate.grec);
-Grec -> lat AnyWord<wfm=~"[)]{1}"* interp(+Translate.grec) RBracket;
-//Translate -> Ent interp(Translate.ru) Grec;
-Translate -> NormEnt interp(Translate.ru) Grec;
-
 //Уточнения, синонимы и все остальное, что есть в скобках. (Работает)
 info -> LBracket AnyWord<wfm=~"[)]{1}",~lat>+ interp(Sin.ent2 ::not_norm) RBracket;
 Sinonim -> NormEnt interp(Sin.ent1 ::not_norm) info (Ent interp(+Sin.ent1 ::not_norm));
@@ -100,6 +93,13 @@ primer -> (NormEnt) NormEnt<gram="род"> Word<kwtype="включение",gram
 prim -> primer interp (Example.state) list interp (Example.state);
 //Word<kwtype="включение",gram="V"> list interp(Example.value);
 
+
+//Перевод с латинского  (Работает)
+lat -> LBracket AnyWord<~lat>* Word<lat,wfm=~"[I|V|L|X]{1,10}"> interp(Translate.grec);
+//lat -> LBracket AnyWord* Word<lat,wfm=~"[I|V|L|X]{1,10}"> interp(Translate.grec);
+Grec -> lat AnyWord<wfm=~"[)]{1}">* interp(+Translate.grec) RBracket;
+//Translate -> Ent interp(Translate.ru) Grec;
+Translate -> list interp(Translate.ru) Grec;
 
 //Работа с тире (доделать)  
 //Including -> NormEnt interp(Including.Name1) '-' NormEnt interp(Including.Name2);
