@@ -44,6 +44,13 @@ message Example: NFactType.TFact
 	optional string value = 2;
 } 
 
+message Difference: NFactType.TFact
+{
+	optional string first= 1;
+	optional string second = 3;
+	optional string why = 2;
+}
+
 message Connection: NFactType.TFact
 {
 	optional string first= 1;
