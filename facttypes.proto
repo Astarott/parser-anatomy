@@ -3,15 +3,15 @@ import "facttypes_base.proto";
 
 message Equality: NFactType.TFact
 {
-	optional string Name1 = 1;
-	optional string Name2 = 2;
+	required string Name1 = 1;
+	required string Name2 = 2;
 	optional string option = 3;
 }
 
 message Including: NFactType.TFact
 {
-	optional string list = 1;	
-	optional string value = 2;
+	required string list = 1;	
+	required string value = 2;
 }
 
 message Entity: NFactType.TFact
@@ -54,6 +54,6 @@ message Difference: NFactType.TFact
 message Connection: NFactType.TFact
 {
 	optional string first= 1;
-	optional string second = 3;
-	optional string with = 2;
+	optional string second = 2;
+	optional string with = 3;
 }

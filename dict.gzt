@@ -20,6 +20,11 @@ TAuxDicArticle "равенство"
     key = { "dictionaries/equality.txt" type=FILE }
 }
 
+TAuxDicArticle "присоединение"
+{
+    key = { "dictionaries/connection.txt" type=FILE }
+}
+
 TAuxDicArticle "сущ"
 {
     key = { "dictionaries/dict.entities.txt" type=FILE }
@@ -40,5 +45,10 @@ TAuxDicArticle "между"
 {
     key = { "в виде" | "с помощью" | "как" | "для" }
 }
+TAuxDicArticle "часть"
+{
+    key = { "подразделять" | "разделять" }
+}
+
 
 
