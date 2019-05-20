@@ -133,7 +133,7 @@ Including -> SuperEnt interp (Including.list) Word<kwtype="включение"> 
 //Including -> list interp (Including.value) Word<kwtype="включение">
 
 //Невзятые факты
-Including -> Word<kwtype="включение"> interp (Including.value); 
+//Including -> Word<kwtype="включение"> interp (Including.value); 
 
 
 //3 связь. Связь соединения, стыковки.
@@ -212,7 +212,7 @@ Connection -> Word<kwtype="присоединение"> list interp (Connection.
 Connection -> NormEnt interp (Connection.first) Comma Word<kwtype="присоединение"> ("по") (NormEnt) Word<kwtype="вместе"> SuperEnt interp (Connection.second);
 
 //Остальные невзятые факты
-Connection -> Word<kwtype="присоединение"> interp (Connection.from); 
+//Connection -> Word<kwtype="присоединение"> interp (Connection.from); 
 
 
 //Connection -> NormEnt interp(Connection.first) Word<kwtype="присоединение"> "при" SuperEnt interp (Connection.with);
@@ -248,7 +248,7 @@ diap -> "от" chislit "до" chislit;
 diap -> chislit "—" chislit;
 
 
-eq ->  Word<kwtype="равенство"> interp (Equality.Name1);
+//eq ->  Word<kwtype="равенство"> interp (Equality.Name1);
 // Связь образования
 //obrazovanie -> NormEnt interp (Formation.first) Comma 
 
