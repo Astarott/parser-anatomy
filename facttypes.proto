@@ -3,6 +3,19 @@ import "facttypes_base.proto";
 
 message Equality: NFactType.TFact
 {
+	optional string Name1 = 1;
+	optional string Name2 = 2;
+	optional string option = 3;
+}
+
+message Including: NFactType.TFact
+{
+	optional string list = 1;	
+	optional string value = 2;
+}
+/*
+message Equality: NFactType.TFact
+{
 	required string Name1 = 1;
 	required string Name2 = 2;
 	optional string option = 3;
@@ -13,6 +26,7 @@ message Including: NFactType.TFact
 	required string list = 1;	
 	required string value = 2;
 }
+*/
 
 message Entity: NFactType.TFact
 {
@@ -57,4 +71,9 @@ message Connection: NFactType.TFact
 	optional string second = 2 [default = "друг с другом"];
 	optional string with = 3;
 	optional string from = 4;
+}
+message Formation: NFactType.TFact
+{
+	optional string first= 1;
+	optional string second = 2;
 }

@@ -24,7 +24,8 @@ TTextMinerConfig {
     { Name = "Connection"},
     { Name = "Participle"},
     { Name = "Example"},
-    { Name = "Difference"}
+    { Name = "Difference"},
+    { Name = "Formation"}
   ]
 
   Output = {
