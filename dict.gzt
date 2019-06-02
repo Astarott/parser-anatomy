@@ -58,6 +58,9 @@ TAuxDicArticle "который"
 {
     key = { "который" | "которой" | "которая" | "которому" }
 }
-
+TAuxDicArticle "имя"
+{
+    key = { "alg:fio" type=CUSTOM }
+}
 
 

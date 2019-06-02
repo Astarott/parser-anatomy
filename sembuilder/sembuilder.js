@@ -1,4 +1,3 @@
-
 function runMystem(lines)
 {
     var tmpFile = java.io.File.createTempFile("mystem-", ".tmp");
@@ -199,7 +198,7 @@ for(var i = 0;i < equality.length;i++)
 for(var i = 0;i < connection.length;i++)
 {
     entity(connection[i].first);
-        entity(connection[i].second);
+	entity(connection[i].second);
 }
 for(var i = 0;i < including.length;i++)
 {
