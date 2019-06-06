@@ -6,9 +6,15 @@
 //Fraza ->  Word<kwtype="прил",gnc-agr[1]>* Word<kwtype="сущ", rt, gnc-agr[1]>
 
 //Прилагательные
-//ExtendAdj -> Word<kwset=["прил","допслова"],gnc-agr[1], GU=~["partcp,S"]> ("и") (Word<kwset=["прил","допслова"],gnc-agr[1], GU=~["partcp,S"]>*);
-ExtendAdj -> Word<kwset=["прил","допслова"],gnc-agr[1], gram=~"S,partcp,PR,APRO"> (info) ("и") (",") (Word<kwset=["прил","допслова"],gnc-agr[1], gram=~"S,partcp,PR,APRO">*) (info) ("и") (",") (Word<kwset=["прил","допслова"],gnc-agr[1], gram=~"S,partcp,PR,APRO">*);
-ExtendAdj -> Adj<gnc-agr[1], gram=~"S,partcp,PR,APRO"> (info) ("и") (Adj<gnc-agr[1], gram=~"S,partcp,PR,APRO">*) (info) ("и") (Adj<gnc-agr[1], gram=~"S,partcp,PR,APRO">*);
+//ExtendAdj -> Word<kwset=["прил","допслова"],gnc-agr[1], GU=~["S,partcp,PR,APRO"]> (info) ("и") (",") (Word<kwset=["прил","допслова"],gnc-agr[1], GU=~["S,partcp,PR,APRO"]>*) (info) ("и") (",") (Word<kwset=["прил","допслова"],gnc-agr[1], GU=~["S,partcp,PR,APRO"]>*);
+//ExtendAdj -> Adj<gnc-agr[1], GU=~["S,partcp,PR,APRO"]> (info) ("и") (Adj<gnc-agr[1],GU=~["S,partcp,PR,APRO"]>*) (info) ("и") (Adj<gnc-agr[1], GU=~["S,partcp,PR,APRO"]>*);
+
+ExtendAdj -> Word<kwset=["прил","допслова"],gnc-agr[1], gram=~"S,partcp,PR,APRO,ANUM"> (info) ("и") (",") (Word<kwset=["прил","допслова"],gnc-agr[1], gram=~"S,partcp,PR,APRO,ANUM">*) (info) ("и") (",") (Word<kwset=["прил","допслова"],gnc-agr[1], gram=~"S,partcp,PR,APRO,ANUM">*);
+ExtendAdj -> Adj<gnc-agr[1], gram=~"S,partcp,PR,APRO,ANUM"> (info) ("и") (Adj<gnc-agr[1],gram=~"S,partcp,PR,APRO,ANUM">*) (info) ("и") (Adj<gnc-agr[1], gram=~"S,partcp,PR,APRO,ANUM">*);
+
+//IntAdj -> Adj<gram="partcp">;
+//IntAdj -> Participle;
+
 //Числительные
 chislit -> Word<gram="NUM">;
 chislit -> Word<wfm="[0-9|,|%]{1,10}">;
@@ -27,10 +33,16 @@ Ent -> (chislit*) (ExtendAdj<c-agr[1]>) Word<kwset=["сущ","допслова"]
 //Сущности, являющиеся единичными прилагательными.
 
 adjent -> (chislit*) ExtendAdj;
+Ent -> (chislit*) ExtendAdj;
+
 
 //Конструкции с родительным падежом (типа "кость правого ребра").
 SuperEnt -> (chislit*) (ExtendAdj<gnc-agr[1]>) Word<kwset=["сущ","допслова"], gnc-agr[1], GU=["S"], rt> (info) (chislit*) (ExtendAdj<gnc-agr[2], gram="род">) Word<kwset=["сущ","допслова"], gnc-agr[2], GU=["S","род"]> ('и') (Word<gram="SPRO">) (ExtendAdj<gnc-agr[3], gram="род">) (Word<kwset=["сущ","допслова"], gnc-agr[3], GU=["S","род",~"вин"]>);
 SuperEnt -> (chislit*) (ExtendAdj<gnc-agr[1]>) Word<kwset=["сущ","допслова"], gnc-agr[1], GU=["S"], rt> (info) PersonName<gram="род">;
+Ent -> (chislit*) (ExtendAdj<gnc-agr[1]>) Word<kwset=["сущ","допслова"], gnc-agr[1], GU=["S"], rt> (info) (chislit*) (ExtendAdj<gnc-agr[2], gram="род">) Word<kwset=["сущ","допслова"], gnc-agr[2], GU=["S","род"]> ('и') (Word<gram="SPRO">) (ExtendAdj<gnc-agr[3], gram="род">) (Word<kwset=["сущ","допслова"], gnc-agr[3], GU=["S","род",~"вин"]>);
+Ent -> (chislit*) (ExtendAdj<gnc-agr[1]>) Word<kwset=["сущ","допслова"], gnc-agr[1], GU=["S"], rt> (info) PersonName<gram="род">;
+
+
 
 //SuperEnt -> (ExtendAdj<gnc-agr[2], gram="род">) Word<kwset=["сущ","допслова"], gnc-agr[2], GU=["S","род"]> ('и') (Word<gram="SPRO">) (ExtendAdj<gnc-agr[2], gram="род">) (Word<kwset=["сущ","допслова"], gnc-agr[2], GU=["S","род",~"вин"]>);
 //SuperEnt -> (ExtendAdj<gnc-agr[1], gram="род">) Word<kwset=["сущ","допслова"], gnc-agr[1], GU=["S","род"]>;
@@ -233,7 +245,7 @@ eq -> list interp (Equality.Name1 ::not_norm) (info) Word<kwtype="равенст
 //eq -> list interp (Equality.Name1 ::not_norm) (info) Word<kwtype="равенство",gram="V"> list interp (Equality.Name2:: not_norm) Comma PartExtend interp (Equality.option ::not_norm) ;
 eq -> list interp (Equality.Name1 ::not_norm) (info) Word<kwtype="равенство",gram="V"> ("собой") list interp (Equality.Name2:: not_norm);
 eq -> list interp(Equality.Name1 :: not_norm) (info) Word<kwtype="равенство"> (Word<gram="SPRO">) SuperEnt interp (Equality.Name2:: not_norm); 
-eq -> NormEnt interp(Equality.Name1) Word<kwtype="рав   енство"> ("также") NormEnt<gram="твор"> interp (Equality.Name2); 
+eq -> NormEnt interp(Equality.Name1) Word<kwtype="равенство"> ("также") NormEnt<gram="твор"> interp (Equality.Name2); 
 
 eq -> NormEnt interp(Equality.Name1 :: not_norm) "вместе" "с" Word<gram="SPRO"> interp (Equality.option ::not_norm) NormEnt interp(+Equality.option :: not_norm) Word<kwtype="равенство"> SuperEnt interp(Equality.Name2:: not_norm);
 eq -> NormEnt interp(Equality.Name1 :: not_norm) Comma Word<kwtype="равенство"> SuperEnt interp (Equality.Name2 ::not_norm);
@@ -284,6 +296,7 @@ Translate -> adjent interp (Translate.ru) Grec;
 
 //Вывод.
 //Final -> NormEnt interp(Entity.Name ::not_norm);
+Final -> list interp(Entity.Name ::not_norm);
 //Final -> SuperEnt interp (Example.state :: not_norm);
 //Final -> list interp (Translate.grec :: not_norm);
 //Final -> listrod interp (Difference.first :: not_norm);
@@ -297,12 +310,12 @@ Translate -> adjent interp (Translate.ru) Grec;
 //Final -> sum;
 //Final -> list;
 //Final -> info interp (Example.state :: not_norm);
-
+/*
 Final -> Including;
 Final -> eq;
 Final -> Connection;
 Final -> tire;
-
+*/
 //Final -> PartExtend;
 //Final -> Oborot;
 
